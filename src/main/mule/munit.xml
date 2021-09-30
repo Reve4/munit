@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="45364aac-b934-4334-87b5-7312c6a90727" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="munitFlow" doc:id="7efad4f3-8ba9-4df7-b466-d3654cda36a3" >
+		<http:listener doc:name="Listener" doc:id="fb2f1b1f-6466-4e6d-ba2d-e288fe9bcae4" config-ref="HTTP_Listener_config" path="/munit"/>
+		<set-payload value='#[output application/json&#10;---&#10;{&#10;  "Name" : "Raj",&#10;  "City" : "Bng",&#10;  "Country" : "India"&#10;}]' doc:name="Set Payload" doc:id="89f2c2c7-03dd-46ef-8c59-8ab66261ce75" />
+		<logger level="INFO" doc:name="Logger" doc:id="f8614ea4-f9ef-432d-83fc-ff617aa4fe4d" message="#[payload]"/>
+	</flow>
+</mule>
