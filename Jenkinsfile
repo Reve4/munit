@@ -7,12 +7,20 @@ pipeline
    bat 'mvn clean install -DskipTests'
    }
    }
-   
- stage('Deploy Application'){
+   stage('Mail'){            
+    steps{               
+     echo "Ok"            
+    }        
+   } 
+  stage('Check'){
    steps{
-   bat 'mvn package -DskipTests deploy -DmuleDeploy'
-   }
-   }
+  post{       
+   always {            
+    emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'        
+   }   
+  }
+  }
+  }
    
 }
 }
