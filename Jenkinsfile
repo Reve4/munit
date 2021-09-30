@@ -13,12 +13,10 @@ pipeline
     }        
    } 
   stage('Check'){
-   steps{
-  post{       
+   steps{     
    always {            
     emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'        
    }   
-  }
   }
   }
    
